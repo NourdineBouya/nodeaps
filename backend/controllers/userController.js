@@ -41,8 +41,8 @@ const getUsers = asyncHandler(async (req, res) => {
   // Login Users
   const loginUser = asyncHandler(async (req, res) => {
       const {email , password} = req.body
-      const user = await User.findOne({email})
-      if(user && password)
+      const user = await User.findOne({ email: email, password: password })
+      if(user)
       {
         res.status(200).json(user)
       }
