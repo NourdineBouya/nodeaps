@@ -37,6 +37,16 @@ const getUsers = asyncHandler(async (req, res) => {
       throw new Error ('User Not created')
     }
   })
+
+  // Login Users
+  const loginUser = asyncHandler(async (req, res) => {
+      const {email , password} = req.body
+      const user = await User.findOne({email})
+      if(user && password)
+      {
+        res.status(200).json(user)
+      }
+  })
   // Update Request
   const updateUser = asyncHandler(async (req, res) => {
      const user = await User.findOne(req.params.id)
@@ -63,5 +73,6 @@ const getUsers = asyncHandler(async (req, res) => {
     getUsers,
     addUser,
     updateUser,
-    deleteUser
+    deleteUser,
+    loginUser
   }
